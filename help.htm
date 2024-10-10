@@ -1,0 +1,239 @@
+<html>
+
+<style type="text/css">
+.tagdiv { width:300; background-color:#BBBBBB; font-family:monospace; }
+.tageg  { background-color:#DDDDFF; font-family:monospace; }
+</style>
+
+<h2>Help for SVGplot 1.1 beta</h2>
+Created by Harry Lau, 2010-2015<br><br>
+
+This program use SVG, a vector-based image format, to plot textbook-like graphs. The output is automatically converted to PNG, a common image format, for easy manipulation.<br><br><br>
+
+<b>Table of Contents</b><br>
+<a href="#PartA">A. Basic Tags</a><br>
+<a href="#PartB">B. Function Tags</a><br>
+<a href="#PartC">C. Format Tags</a><br>
+<a href="#PartD">D. Text style Tags</a><br>
+<a href="#PartE">E. Symbol Tags</a><br>
+<a href="#PartF">F. Greek Letters</a><br>
+<br><br>
+
+<hr>
+
+<a name="PartA"><b>A. Basic Tags</b><br>
+There are 6 basic tags which <b>must be included</b> in each plot.<br><br>
+
+<div class="tagdiv"><b>xlabel[offset]=</b><i>text</i></div>
+<div style="padding:12px;">
+Define label for the x-axis.<br> Offset could be specified, taking right as positive.
+Example: <br>
+<span class="tageg">xlabel=Time \it{t} / s</span><br>
+The label looks like: Time <i>t</i> / s<br>
+<br>
+</div>
+
+<div class="tagdiv"><b>xparam=</b><i>x1,x2,int,skip</i></div>
+<div style="padding:12px;">
+The x-axis starts from <i>x1</i> to <i>x2</i>, with an interval of <i>int</i>.<br>
+You may also <i>skip</i> some label number.<br>
+Examples: <br>
+<span class="tageg">xparam=0,60,10</span><br>
+The x-axis goes like 0,10,20,30,40,50,60.<br>
+<span class="tageg">xparam=0,60,20</span><br>
+The x-axis goes like 0,20,40,60.<br>
+<span class="tageg">xparam=0,60,10,1</span><br>
+The x-axis goes like 0,20,40,60, where the space of 10,30,50 are still here.<br>
+<br>
+</div>
+
+<div class="tagdiv"><b>ylabel=</b><i>text</i></div>
+<div style="padding:12px;">
+Define label for the y-axis.<br>
+Example: <br>
+<span class="tageg">ylabel=Volume / cm^{3}</span><br>
+The label looks like: Volume / cm<sup>3</sup><br>
+<br>
+</div>
+
+<div class="tagdiv"><b>yparam=</b><i>y1,y2,int,skip</i></div>
+<div style="padding:12px;">
+The y-axis starts from <i>y1</i> to <i>y2</i>, with an interval of <i>int</i>.<br>
+For the example of <i>skip</i>, see <b>xparam</b>.<br>
+Example: <br>
+<span class="tageg">yparam=-4,6,2</span><br>
+The y-axis goes like -4,-2,0,2,4,6.<br>
+<br>
+</div>
+
+<div class="tagdiv"><b>subdiv=</b><i>n</i></div>
+<div style="padding:12px;">
+How many sub-divisions between one division.<br>
+Usual values are 1, 2, 5 and 10.<br>
+Example: <br>
+<span class="tageg">subdiv=5</span><br>
+There are 5 sub-divisions between one division.<br>
+<br>
+</div>
+
+<div class="tagdiv"><b>gridsize=</b><i>n</i></div>
+<div style="padding:12px;">
+Size of the graph.<br>
+Default value is 1. Decimals (e.g. 1.5) are allowed.<br>
+Example: <br>
+<span class="tageg">gridsize=2</span><br>
+The size of the graph is doubled.<br>
+<br>
+</div>
+
+
+<br><hr>
+
+
+<a name="PartB"><b>B. Function Tags</b><br>
+<br>
+
+<div class="tagdiv"><b>line[<i>color</i>]=</b><i>x1,y1;x2,y2;x3,y3;...</i></div>
+<div style="padding:12px;">
+Plot straight lines to connect between two points.<br>
+Default <i>color</i> is black, which is optional.<br>
+Example: <br>
+<span class="tageg">line=0,0;20,100;</span><br>
+<span class="tageg">line[red]=0,100;50,40;10,80;</span><br>
+<br>
+</div>
+
+<div class="tagdiv"><b>dash[<i>color</i>]=</b><i>x1,y1;x2,y2;x3,y3;...</i></div>
+<div style="padding:12px;">
+Plot straight dashed lines to connect between two points.<br>
+Default <i>color</i> is black, which is optional.<br>
+Example: <br>
+<span class="tageg">dash=0,0;20,100;</span><br>
+<span class="tageg">dash[#00FF00]=0,100;50,40;10,80;</span><br>
+<br>
+</div>
+
+<div class="tagdiv"><b>curve[<i>color</i>]=</b><i>x1,y1;x2,y2;x3,y3;...</i></div>
+<div style="padding:12px;">
+Plot curved lines to connect the points.<br>
+Default <i>color</i> is black, which is optional.<br>
+Example: <br>
+<span class="tageg">curve[blue]=0,0;2,4;3,9;4,16;</span><br>
+<br>
+</div>
+
+<div class="tagdiv"><b>points[<i>color</i>]=</b><i>x1,y1;x2,y2;x3,y3;...</i></div>
+<div style="padding:12px;">
+Indicate the points given with a cross.<br>
+Default <i>color</i> is black, which is optional.<br>
+Example: <br>
+<span class="tageg">points[blue]=0,0;2,4;3,9;4,16;</span><br>
+<br>
+</div>
+
+<div class="tagdiv"><b>mark[<i>color</i>,<i>off-x</i>,<i>off-y</i>]=</b><i>x,y,text</i></div>
+<div style="padding:12px;">
+Mark down the <i>text</i> on the graph at coordinates (<i>x</i>,<i>y</i>).<br>
+Default <i>color</i> is black, which is optional.<br>
+<i>off-x</i> and <i>off-y</i> are offsets in pixels, where +ve offset means moving right and down. Defaults are 0, which is optional.<br>
+Example: <br>
+<span class="tageg">mark=10,15,Hello</span><br>
+<span class="tageg">mark[red]=0,2,\it{N}_{0}</span><br>
+<span class="tageg">mark[orange,0,-10]=4,7,John</span><br>
+<br>
+</div>
+
+<div class="tagdiv"><b>equation[<i>color</i>]=</b><i>equation</i></div>
+<div style="padding:12px;">
+<b>(Experimental)</b> Plot the given equation according to the range of <i>x</i>.<br>
+The equation must be a function of <i>x</i> (cannot be <i>y</i>, <i>t</i>, etc.)<br>
+Only functions that are continuous within the range of <i>x</i> can be plotted.<br>
+Default <i>color</i> is black, which is optional.<br>
+Supported functions are listed below:<br>
+<code>
+'sqrt','abs','ln','log',<br>
+'sin','sinh','arcsin','asin','arcsinh','asinh',<br>
+'cos','cosh','arccos','acos','arccosh','acosh',<br>
+'tan','tanh','arctan','atan','arctanh','atanh'.<br>
+</code>
+<br>
+Example: <br>
+<span class="tageg">equation=3*x+1</span><br>
+<span class="tageg">equation[blue]=e^(-0.5x)</span><br>
+<span class="tageg">equation=ln(0.0001+x)</span><br>
+<span class="tageg">equation[red]=sin(x*pi)</span><br>
+<br>
+</div>
+
+<br><hr>
+
+
+<a name="PartC"><b>C. Format Tags</b><br>
+These tags can fine tune the format of the graph.<br><br>
+
+<div class="tagdiv"><b>\nolabels</b></div>
+<div style="padding:12px;">
+Remove the axes labels, including the numbers indicated on the axes.<br>
+<br>
+</div>
+
+<div class="tagdiv"><b>\nolabelnums</b></div>
+<div style="padding:12px;">
+Just Remove the numbers indicated on the axes.<br>
+<br>
+</div>
+
+<div class="tagdiv"><b>\noaxes</b></div>
+<div style="padding:12px;">
+Remove the axes.<br>
+<br>
+</div>
+
+<div class="tagdiv"><b>\nogrids</b></div>
+<div style="padding:12px;">
+Remove the grids.<br>
+<br>
+</div>
+
+<div class="tagdiv"><b>\sideaxes</b></div>
+<div style="padding:12px;">
+Put the x-axis (and y-axis if no negative value) to the side(s) of the graph.<br>
+<br>
+</div>
+
+<br><hr>
+
+
+<a name="PartD"><b>D. Text style Tags</b><br>
+These tags can set the style of the texts.<br><br>
+
+<div class="tagdiv"><b>\it{<i>text</i>}</b></div>
+<div style="padding:12px;">
+Make the <i>text</i> becomes italic.<br>
+<br>
+</div>
+
+<div class="tagdiv"><b>^{<i>text</i>}</b></div>
+<div style="padding:12px;">
+Make the <i>text</i> becomes superscript.<br>
+<br>
+</div>
+
+<div class="tagdiv"><b>_{<i>text</i>}</b></div>
+<div style="padding:12px;">
+Make the <i>text</i> becomes subscript.<br>
+<br>
+</div>
+
+<br><hr>
+
+<a name="PartE"><b>E. Symbol Tags</b><br>
+Insert the symbols as shown in the pull-down menu. That's it.<br><br>
+
+<br><hr>
+
+<a name="PartF"><b>F. Greek Letters</b><br>
+Click the "Greek keyboard" button to toggle the greek keyboard, and click again to hide it.
+The greek letter you clicked is inserted into the textarea.<br>
+
+<br><br>
